@@ -1,4 +1,6 @@
 import type { Interpolation, Theme } from "@emotion/react";
+import AddIcon from "@mui/icons-material/AddOutlined";
+import Button from "@mui/material/Button";
 import type { FC } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import type { TemplateExample } from "api/typesGenerated";
@@ -23,7 +25,6 @@ import { Stack } from "components/Stack/Stack";
 import { TemplateCard } from "modules/templates/TemplateCard/TemplateCard";
 import { docs } from "utils/docs";
 import type { TemplatesByOrg } from "utils/templateAggregators";
-import { CreateTemplateButton } from "../CreateTemplateButton";
 import { EmptyTemplates } from "../EmptyTemplates";
 
 export const Language = {
@@ -75,7 +76,17 @@ export const TemplatesPageView: FC<TemplatesPageViewProps> = ({
     <Margins>
       <PageHeader
         actions={
-          canCreateTemplates && <CreateTemplateButton onNavigate={navigate} />
+          canCreateTemplates && (
+            <Button
+              startIcon={<AddIcon />}
+              variant="contained"
+              onClick={() => {
+                navigate("/starter-templates");
+              }}
+            >
+              Create Template
+            </Button>
+          )
         }
       >
         <PageHeaderTitle>
